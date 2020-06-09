@@ -1,0 +1,35 @@
+language: cpp
+jobs:
+  include:
+  - os: osx
+    script:
+    - cmake -H. -B_build
+    - cmake --build _build
+    - cd _build
+    - cpack -G DragNDrop
+    - cd ..
+  - os: linux
+    script:
+    - cmake -H. -B_build
+    - cmake --build _build
+    - cd _build
+    - cpack -G DEB
+    - cpack -G RPM
+    - cd ..
+addons:
+  apt:
+    packages:
+    - cmake
+    - cmake-data
+    - rpm
+deploy:
+  provider: releases
+  api_key:
+    secure: MdIJUhqvJsNylKZ/u0qflYGMOhFhIVpGZFXKNTN6MC73QFmxEHwxDkpnxybxG66CdFY375UGgOiABXVVUap5iYCctujfE9HJTZfDDv4Plfs5dzJq33kkbnZAnuftkk03eqfZ3f5Qakx9jl452ScdPTmaBsuomvRmOrOsghU3vVMozDe9gHDrhWV4wlkdnoIGyGLQ0kX6aw3rxqQQGDuIf5Al/AAAn2ieQCULtjs5KWceOZob2vmd2wnLo5UTg0K5F1ZvbfeY8RZnKXffenCLBN/Z8FeUdKR3k2/mQVo+MhjMeLkU1Zd6I1ykTczhVdVsl5oocN/yecEsPW3qRdnnrp8JfOKgEwGskfJTs+Dsh8+sbJz1UpOkLSBQuggUD9jEakVGLguoon7U/Ldl2fKVS7aM470LYrM/hWGgVw3n8Uq2yi2ZSAkzllbL1wMj9IIOjOGc5tw4WRGzTB1gjgm1sM1sJLfSHViFd0aAx3V5pLwexm5Q2uY1TqsasQrtXxhRzqD5KW+1WkfIk/z7jzLNHmQ2qO075GPTK1Su0aWGATIlktMR2zYhDHwMNFgQQKOR5oz8MtVKBsY/+pZj6BYBjo/XY/TuNRtQ1HzZ+apxnX8nO4E/5ceibl3sHE9IzW1Mw14ZrSuPOTGx31zYYaobbEmbcma6HSdGPIXLdBv3Ih4=
+  file: 
+    - ./_build/solver-1.0.0.-Darwin.dmg
+    - ./_build/solver-1.0.0.-Linux.deb
+    - ./_build/solver-1.0.0.-Linux.rpm
+  skip_cleanup: true
+  on:
+    tags: true
