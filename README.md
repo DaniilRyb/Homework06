@@ -1,3 +1,6 @@
+[![Build status](https://ci.appveyor.com/api/projects/status/12qqjwc35wo16n33/branch/master?svg=true)](https://ci.appveyor.com/project/Daniil35412/homework06/builds/33514777)
+
+
 ## Homework VI
 
 ```sh
